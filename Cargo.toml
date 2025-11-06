@@ -63,8 +63,8 @@ thiserror = { version = "2", default-features = false }
 bitvec = { version = "1", default-features = false, features = ["alloc"] }
 
 # Dependencies for cairo-1-hints feature
-cairo-lang-starknet = { version = "2.12.0-dev.0", default-features = false }
-cairo-lang-casm = { version = "2.12.0-dev.0", default-features = false }
+cairo-lang-starknet = { version = "2.12.0-dev.1", default-features = false }
+cairo-lang-casm = { version = "2.12.0-dev.1", default-features = false }
 
 cairo-lang-starknet-classes = { version = "2.12.0-dev.0", default-features = false }
 cairo-lang-compiler = { version = "2.12.0-dev.0", default-features = false }
