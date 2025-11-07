@@ -134,7 +134,8 @@ pub fn cairo_run_program(
     sierra_program: &SierraProgram,
     cairo_run_config: Cairo1RunConfig,
 ) -> Result<(CairoRunner, Vec<MaybeRelocatable>, Option<String>), Error> {
-    let metadata = calc_metadata_ap_change_only(sierra_program)
+    let program_info = cairo_lang_sierra_type_size::ProgramRegistryInfo::new(sierra_program).expect("program info");
+    let metadata = calc_metadata_ap_change_only(sierra_program, &program_info)
         .map_err(|_| VirtualMachineError::Unexpected)?;
     let sierra_program_registry = ProgramRegistry::<CoreType, CoreLibfunc>::new(sierra_program)?;
     let type_sizes =
@@ -144,7 +145,7 @@ pub fn cairo_run_program(
         max_bytecode_size: usize::MAX,
     };
     let casm_program =
-        cairo_lang_sierra_to_casm::compiler::compile(sierra_program, &metadata, config)?;
+        cairo_lang_sierra_to_casm::compiler::compile(sierra_program, &program_info, &metadata, config)?;
 
     let main_func = find_function(sierra_program, "::main")?;
 
